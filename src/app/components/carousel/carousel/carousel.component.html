@@ -1,0 +1,27 @@
+<div class="w-[80vw] flex justify-center items-center mt-14">
+  <div class="w-full flex justify-center items-center gap-2 pt-4 px:4">
+    <div
+      class="icon-container flex items-center"
+      (click)="navigateHandler('backward')"
+    >
+      <span
+        class="iconify text-3xl text-secondary cursor-pointer"
+        data-icon="ion:arrow-back-circle-sharp"
+        data-inline="false"
+      ></span>
+    </div>
+    <div class="flex-grow">
+      <img [src]="imgToShow" class="w-full h-[32rem] object-cover" />
+    </div>
+    <div
+      class="icon-container flex items-center"
+      (click)="navigateHandler('advance')"
+    >
+      <span
+        class="iconify text-3xl text-secondary cursor-pointer"
+        data-icon="carbon:next-filled"
+        data-inline="false"
+      ></span>
+    </div>
+  </div>
+</div>
