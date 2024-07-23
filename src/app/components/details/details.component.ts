@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProductInfo, cardViewedFrom } from '../../types';
 import { ProductsService } from '../../services';
@@ -20,6 +20,8 @@ import { addToCart } from '../../store/actions';
   host: { ngSkipHydration: 'true' },
 })
 export class DetailsComponent implements OnInit {
+  products: IProductInfo[] = [];
+
   viewingFrom: cardViewedFrom = 'detailsPage';
 
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -46,6 +48,10 @@ export class DetailsComponent implements OnInit {
       .subscribe((value) => {
         this.productDetails = value;
       });
+
+    this.productsService.getAllProducts.subscribe((value) => {
+      this.products = value;
+    });
   }
 
   addToCartHandler(quantity: number) {
