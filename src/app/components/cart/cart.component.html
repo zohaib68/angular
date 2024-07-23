@@ -1,0 +1,76 @@
+<div class="mt-20 flex justify-center items-center">
+  <div
+    *ngIf="cartState"
+    class="relative mt-4 flex flex-col gap-4 w-5/6 p-2 bg-base-200/40 shadow-md rounded-md"
+  >
+    <div class="flex flex-col max-h-[calc(100vh-16rem)] overflow-y-auto">
+      <div class="flex-grow overflow-y-auto">
+        <div
+          class="w-full py-2 border-b border-b-base-200/50 hover:bg-base-200 overflow-x-hidden transition-all"
+          *ngFor="let item of cartState.items"
+        >
+          <div class="flex flex-wrap gap-4 items-center justify-between">
+            <div class="w-[80%] flex flex-wrap gap-2 items-center">
+              <app-avatar [imageSrc]="item.image" [altText]="'test image'">
+              </app-avatar>
+              <div class="flex flex-col gap-1">
+                <span> {{ item.price }}$ </span>
+
+                <span class="line-clamp-2 break-all">
+                  {{ item.title }}
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <div class="flex gap-2">
+                <span>Quantity</span
+                ><span>
+                  {{ item.quantity }}
+                </span>
+              </div>
+              <div class="flex gap-2 items-center text-base-100">
+                <button
+                  (click)="
+                    mutateQuantityHandler({
+                      item,
+                      quantity: item.quantity,
+                      action: 'minus',
+                    })
+                  "
+                  class="bg-error drop-shadow-md rounded-md w-5 p-sm active:translate-x-1 active:-translate-y-1 transition-all"
+                >
+                  -
+                </button>
+                <button
+                  (click)="
+                    mutateQuantityHandler({
+                      item,
+                      quantity: item.quantity,
+                      action: 'plus',
+                    })
+                  "
+                  class="bg-primary drop-shadow-md rounded-md w-5 p-sm active:translate-x-1 active:-translate-y-1 transition-all"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <span>{{ totalPrice }}$</span>
+    </div>
+    <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+      <button
+        class="bg-primary shadow-md rounded-md text-base-100 p-4 text-lg active:translate-x-1 active:-translate-y-1 transition-all"
+      >
+        Place Order
+      </button>
+    </div>
+    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+      <span class="bg-primary text-base-100 p-4 text-lg rounded-md">Cart</span>
+    </div>
+  </div>
+</div>

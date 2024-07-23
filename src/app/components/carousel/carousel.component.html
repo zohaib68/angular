@@ -1,0 +1,46 @@
+<div class="w-[80vw] flex justify-center items-center">
+  <!-- <div class="w-full flex justify-center items-center gap-2 pt-4 px:4">
+    <div
+      class="icon-container flex items-center"
+      (click)="navigateHandler('backward')"
+    >
+      <span
+        class="iconify text-3xl cursor-pointer"
+        data-icon="ion:arrow-back-circle-sharp"
+        data-inline="false"
+      ></span>
+    </div>
+    <div class="flex-grow">
+      <img [src]="imgToShow" class="w-full h-[32rem] object-contain" />
+    </div>
+    <div
+      class="icon-container flex items-center"
+      (click)="navigateHandler('advance')"
+    >
+      <span
+        class="iconify text-3xl cursor-pointer"
+        data-icon="carbon:next-filled"
+        data-inline="false"
+      ></span>
+    </div>
+  </div> -->
+
+  <div class="flex flex-col gap-2">
+    <div class="carousel w-full">
+      <div
+        *ngFor="let item of products"
+        [id]="item.image"
+        class="carousel-item w-full"
+      >
+        <img [src]="item.image" class="w-full h-[32rem] object-contain" />
+      </div>
+    </div>
+    <div class="flex w-full justify-center gap-2 py-2">
+      <app-paginator
+        (onPageChange)="changeHandler($event)"
+        [totalPages]="products.length"
+      >
+      </app-paginator>
+    </div>
+  </div>
+</div>

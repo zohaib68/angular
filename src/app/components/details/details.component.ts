@@ -1,39 +1,66 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HousingLocationInterface, cardViewedFrom } from '../../types';
-import { HousingService } from '../../services';
-import { HouseCardComponent } from '../houseCard/house-card/house-card.component';
+import { IProductInfo, cardViewedFrom } from '../../types';
+import { ProductsService } from '../../services';
 import { CommonModule } from '@angular/common';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import Iconify from '@iconify/iconify';
+import { AddToCartModalComponent } from '../modals';
+import { modalToggleHandler } from '../../utils';
+import { Store } from '@ngrx/store';
+import { IAppState } from '../../store';
+import { addToCart } from '../../store/actions';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, HouseCardComponent],
+  imports: [CommonModule, ProductCardComponent, AddToCartModalComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
+  host: { ngSkipHydration: 'true' },
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   viewingFrom: cardViewedFrom = 'detailsPage';
 
   route: ActivatedRoute = inject(ActivatedRoute);
 
-  housingService = inject(HousingService);
+  productsService = inject(ProductsService);
 
-  houseDetails: HousingLocationInterface | undefined;
+  productDetails: IProductInfo | null = null;
 
-  houseId: number | undefined = undefined;
+  productId: number | undefined = undefined;
 
-  constructor() {
+  modalId: string = 'addToCartConfirmationModalDetailView';
+
+  constructor(private store: Store<IAppState>) {
     const {
       snapshot: {
         params: { id = '' },
       },
     } = this.route;
 
-    this.houseId = Number(id);
+    this.productId = Number(id);
 
-    this.houseDetails = this.housingService.getHousingLocationById(
-      Number(this.houseId)
-    );
+    this.productsService
+      .getProductById(Number(this.productId))
+      .subscribe((value) => {
+        this.productDetails = value;
+      });
+  }
+
+  addToCartHandler(quantity: number) {
+    if (this.productDetails) {
+      this.store.dispatch(addToCart({ ...this.productDetails, quantity }));
+
+      modalToggleHandler(this.modalId, 'close');
+    }
+  }
+
+  toggleModal() {
+    modalToggleHandler(this.modalId, 'open');
+  }
+
+  ngOnInit() {
+    Iconify.scan();
   }
 }

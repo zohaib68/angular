@@ -1,16 +1,31 @@
 <main class="main">
-  <div
-    class="navButtonsContainer flex w-full h-14 bg-secondary/40 text-secondary-content fixed top-0"
+  <nav
+    class="flex justify-between w-full h-14 p-2 bg-primary/60 fixed top-0 z-50"
   >
-    <a class="button" routerLink="/">
-      <button
-        routerLinkActive="bg-primary text-white"
+    <div class="flex-grow gap-4 flex items-center justify-center">
+      <a
+        class="navButton"
+        routerLink="/"
+        routerLinkActive="activebutton"
         ariaCurrentWhenActive="page"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
         Home
-      </button>
-    </a>
-  </div>
+      </a>
+      <div class="divider divider-primary divider-horizontal"></div>
+      <a
+        class="navButton"
+        routerLink="/cart"
+        routerLinkActive="activebutton"
+        ariaCurrentWhenActive="page"
+      >
+        Cart
+      </a>
+    </div>
+    <div class="flex items-center">
+      <input type="checkbox" value="darkMode" class="toggle theme-controller" />
+    </div>
+  </nav>
 </main>
 
 <router-outlet />

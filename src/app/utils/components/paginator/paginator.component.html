@@ -1,0 +1,53 @@
+<div class="flex justify-center gap-4 items-center">
+  <ng-container *ngIf="totalPages">
+    <div>
+      <button
+        class="{{ baseStyle }} {{
+          buttonDisableStateManageMent(currentPage === 1)
+        }}"
+        (click)="previousPage()"
+        [disabled]="currentPage === 1"
+      >
+        <span class="icon">‹</span>
+      </button>
+    </div>
+    <div class="flex gap-2 items-center">
+      <ng-container *ngIf="startPage > 1">
+        <div>
+          <button class="{{ baseStyle }}" (click)="goToPage(1)">1</button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="startPage > 2">
+        <div>...</div>
+      </ng-container>
+      <ng-container *ngFor="let pageNumber of pageNumbers">
+        <div>
+          <button class="{{ baseStyle }}" (click)="goToPage(pageNumber)">
+            {{ pageNumber }}
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="endPage < totalPages - 1">
+        <div>...</div>
+      </ng-container>
+      <ng-container *ngIf="endPage < totalPages">
+        <div>
+          <button class="{{ baseStyle }}" (click)="goToPage(totalPages)">
+            {{ totalPages }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div>
+      <button
+        class="{{ baseStyle }} {{
+          buttonDisableStateManageMent(currentPage === totalPages)
+        }}"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+      >
+        <span class="icon">›</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

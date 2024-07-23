@@ -1,6 +1,57 @@
-<div class="w-full h-screen flex justify-center items-center px-4">
-  <app-house-card
-    [houseDetails]="houseDetails"
-    [viewingFrom]="viewingFrom"
-  ></app-house-card>
+<div class="w-full mt-14 flex justify-center items-center p-4">
+  <div
+    *ngIf="productDetails"
+    class="h-full grid grid-cols-5 gap-4 max-w-3xl bg-base-200/60 p-2 rounded-md"
+  >
+    <div class="col-span-3">
+      <img
+        [src]="productDetails.image"
+        class="w-full h-[32rem] object-cover border border-primary rounded-md"
+      />
+    </div>
+    <div class="col-span-2 flex flex-col h-[32rem] justify-between">
+      <div class="flex flex-col gap-2 flex-grow overflow-y-auto">
+        <span class="font-semibold text-sm">{{ productDetails.category }}</span>
+        <span class="font-semibold">{{ productDetails.title }}</span>
+        <div class="flex justify-between">
+          <div class="flex gap-2 items-center text-base">
+            <div class="icon-container flex gap-1 items-center">
+              <span
+                class="iconify"
+                data-icon="ic:baseline-star-rate"
+                data-inline="false"
+              ></span>
+              <span class="text-sm">{{ productDetails?.rating?.rate }}/10</span>
+            </div>
+
+            <div class="icon-container flex gap-1 items-center">
+              <span
+                class="iconify"
+                data-icon="material-symbols:production-quantity-limits"
+                data-inline="false"
+              ></span>
+              <span class="text-sm">{{ productDetails?.rating?.count }}</span>
+            </div>
+          </div>
+        </div>
+        <span class="font-semibold text-sm">{{ productDetails.price }}$</span>
+        <span class="font-semibold text-sm">{{
+          productDetails.description
+        }}</span>
+      </div>
+      <div class="flex justify-end items-center">
+        <button
+          (click)="toggleModal()"
+          class="btn btn-md btn-square btn-primary text-base-100"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-add-to-cart-modal
+    modalId="{{ modalId }}"
+    (addToCartEvent)="addToCartHandler($event)"
+  >
+  </app-add-to-cart-modal>
 </div>

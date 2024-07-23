@@ -1,11 +1,17 @@
-<div class="flex flex-col justify-center items-center px-4 gap-4">
+<div class="flex flex-col justify-center items-center px-4 gap-4 mt-14">
   <app-carousel></app-carousel>
-  <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-2 w-4/5">
-    <app-house-card
-      *ngFor="let houseDetails of houses"
-      [houseDetails]="houseDetails"
+  <app-search-input (onSearch)="searchHandler($event)"></app-search-input>
+  <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-6 w-4/5">
+    <app-product-card
+      *ngFor="let product of productsToRender"
+      [product]="product"
       [viewingFrom]="viewingFrom"
+      (productSelectioEvent)="productSelectionListener($event)"
       ngSkipHydration
-    ></app-house-card>
+    ></app-product-card>
   </div>
+  <app-add-to-cart-modal
+    [modalId]="modalId"
+    (addToCartEvent)="addToCartHandler($event)"
+  ></app-add-to-cart-modal>
 </div>

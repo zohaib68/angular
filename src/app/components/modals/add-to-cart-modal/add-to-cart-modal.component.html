@@ -1,0 +1,42 @@
+<dialog id="{{ modalId }}" class="modal">
+  <div class="modal-box !p-0">
+    <app-modal-header [title]="modalTitle"> </app-modal-header>
+    <div class="p-2 w-full h-full">
+      <div
+        class="w-full h-full flex flex-col gap-2 justify-center items-center"
+      >
+        <h4 class="shadow-md p-2 rounded-md bg-primary/20">Quantity</h4>
+        <span>{{ quantity }}</span>
+        <div class="flex justify-center items-center gap-2">
+          <button
+            (click)="quantityHandler('plus')"
+            class="drop-shadow-md bg-primary rounded-md text-base-100 w-8 flex justify-center items-center text-lg active:translate-x-1 active:-translate-y-1 transition-all"
+          >
+            +
+          </button>
+          <button
+            (click)="quantityHandler('minus')"
+            class="drop-shadow-md bg-error rounded-md text-base-100 w-8 flex justify-center items-center text-lg active:translate-x-1 active:-translate-y-1 transition-all"
+          >
+            -
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex justify-center items-center gap-2 p-4 border-t border-base-300 rounded-b"
+    >
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button
+          (click)="addProductHandler()"
+          type="button"
+          class="drop-shadow-md bg-primary rounded-md text-base-100 p-2 text-lg active:translate-x-1 active:-translate-y-1 transition-all"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+</dialog>

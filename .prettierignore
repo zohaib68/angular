@@ -1,9 +1,21 @@
 # Ignore artifacts:
 build
 coverage
-
-# Ignore all HTML files:
-*.html
+dist
+node_modules
 
 # Ignore specific files:
-src/some-specific-file.ts
+src/assets/*
+
+# Ignore all HTML files in a specific directory:
+public/**/*.html
+
+# Ignore specific file types:
+*.min.js
+*.map
+*.snap
+
+# Ignore all files in a specific directory except a few:
+!src/
+src/**/*.test.js
+src/**/*.test.ts

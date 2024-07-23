@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.transition-height {
+  animation: collapse 5s infinite;
+}
+
+@keyframes mymove {
+  from {
+    height: 0;
+  }
+  to {
+    top: auto;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Thumb */
+*::-webkit-scrollbar-thumb {
+  @apply bg-opacity-0 bg-base-300 hover:bg-gray-500;
+  border-radius: 10px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  @apply bg-opacity-100;
+}
+
+/* For IE, Edge and Firefox */
+
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
